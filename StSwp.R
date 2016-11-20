@@ -1,10 +1,10 @@
-# R Script - dplyr predominant
+# R Script
 # Author: leerssej
 # Date: 19 Nov 2016
-# Desc: Street sweeper functions to standardize domestic and international addresses
-# Desc: Standardization to dominant googlemap address information
-# Desc: Extensive Secondary unit designator removal to improve validity of googleMaps address verification/geocoding
-# Desc: Country specific (conditional) address cleansing functions to apply only in a subset of particular countries 
+# Desc: Street sweeper functions to standardize domestic and international street addresses
+# Desc: Standardization to align with dominant googleMaps address information formats
+# Desc: Extensive Secondary unit designator removal to improve validity of googleMaps ddress verification/geocoding
+# Desc: Country specific (conditional) address cleansing functions to apply only on a subset of particular countries 
         # feed the function (address, countryName) such that the country names comply with those listed in the function
 # Desc: Language specific (conditional) address cleansing functions to apply on subset of addresses classified according to designated languages
         # feed the function (address, LanguageCode) such that the language codes comply with the ISO 639-1 codes listed in the function
@@ -47,7 +47,7 @@ x <- gsub(" Y ", " y ", x, ignore.case = T)
 x <- gsub(" L Hopital", " l'Hopital", x, ignore.case = T)
 x <- gsub(" L([a,e,o]) ", " l\\1 ", x, ignore.case = T)
 # I am aware that most of below are not actually post boxes, but I want all the attendant data
-# stripped in similar fashion as with boites postales so it is simply and expediant Transform. 
+# stripped in similar fashion as with boites postales so it is simple and expedient to later transform all similars by same rule. 
 x <- gsub("(^|\\s+)P(ost)*\\s*O(ffice)*\\s*B(ox)*(\\s+|\\d+)", " Bp ", x, ignore.case = T)
 x <- gsub("(^|\\s+)C(ampus)*\\s*B(ox)*(\\s+|-)", " Bp ", x, ignore.case = T)
 x <- gsub("(^|\\s+)P(rivate)*\\s*B(ag)*(\\s+|-)", " Bp ", x, ignore.case = T)
@@ -145,7 +145,7 @@ x <- gsub("(^|\\s+|-)Rm\\s*(\\s+|$)", " Room ", x, ignore.case = T)
 x <- gsub("(^|\\s+|-)Sala\\s*(\\s+|$)", " Room ", x, ignore.case = T)
 x <- gsub("(^|\\s+|-)Aile\\d*(\\s+|$)", " Wing ", x, ignore.case = T)
 x <- gsub("(^|\\s+|-)Bureau(\\s+|$)", " Office ", x, ignore.case = T)
-# Hospital and Clinic Cleans
+# Hospital and Clinic Rectifications
 x <- gsub("(^|\\s+)Hos\\s*Pital(\\s+|$)", " Hospital ", x, ignore.case = T)
 x <- gsub("(^|\\s+)Cl*i\\s*n\\s*I\\s*q'*ues(\\s+|$)", " Cliniques ", x, ignore.case = T)
 x <- gsub("(^|\\s+)Cl*i\\s*n\\s*I\\s*ques(\\s+|$)", " Cliniques ", x, ignore.case = T)
@@ -199,7 +199,7 @@ x <- gsub("(^|\\s+)(Main|North|South|East|West|Outpatient|Emergency|Centre|On-Ca
 x <- gsub("(^|\\s+)(\\w|\\d+)(\\s+|-)Wing(\\s+|$)", " ", x, ignore.case = T)
 x <- gsub("(^|\\s+)\\d?-*\\w?\\s+Wing(\\s+|$)", " ", x, ignore.case = T)
 x <- gsub("(^|\\s+)(59th Medical|Atkinson Morley|-*Barr(i|e)nger|Bermondsey|Bexley|Burr|Cambridge|Cheyne|Claremont|Clarence|Crf Leazes|Daly|Daly|Fullham|Hambled(e|o)n|Healy|Healy|Horder|Horton|Jenner|Kenning|Knightsbridge|Lambeth|Leazes|Mint|New Victoria|New|Peter Howson|Southwar(d|k)|Sutton|Thornton|Wallace|Weller|Woolverstone|Elizabeth Garrett Anderson|chancellors)\\s+Wing(\\d|\\s+|-)*\\w?\\d*(\\s+|$)", " ", x, ignore.case = T)
-#Pharmacy and Department fixes
+# Pharmacy and Department fixes
 x <- gsub("(^|\\s+)(Services\\s+)*Ph\\s*a\\s*r\\s*m\\s*A\\s*c\\s*y(\\s*Manufacturing)*(\\s+|$)", " Pharmacy ", x, ignore.case = T)
 x <- gsub("(^|\\s+)Pharm Services(\\s+|$)", " Pharmacy Services", x, ignore.case = T)
 x <- gsub("(^|\\s+)Ph\\s*a\\s*r\\s*m\\s*A\\s*cie(\\s*Centr*ale)*(\\s+|$)", " Pharmacie ", x, ignore.case = T)
@@ -220,7 +220,7 @@ x <- gsub("(^|\\s+)Cardiothoracic Services(\\s+|$)", " ", x, ignore.case = T)
 x <- gsub("(^|\\s+)(Family|Clalit)\\s+Health Services(\\s+|$)", " ", x, ignore.case = T)
 x <- gsub("(^|\\s+|-)(Clinical\\s*(Trials\\s*)*)*(Aseptic\\s*)*(Can\\s*cer\\s*)*(Re\\s*s(earch)*\\s*)*Services(?!\\s+Rd)(\\s+|$)", " ", x, ignore.case = T, perl = T)
 x <- gsub("(^|\\s+)Servici(o|e)\\s+\\w+olog(i(a|e)|y)(\\s+Pediatric(a)*)*(\\s+\\w+olog(i(a|e)|y))*(\\s+|$)", " ", x, ignore.case = T)
-#Pharmacy expurgations
+# Pharmacy expurgations
 x <- gsub("(^|\\s+)((Ph|F)armac(ia|ie|y)*\\s+Department|Department\\s+(of\\s)*(\\w|\\d+-*\\d*|\\d+(\\s+(y|and|et)\\s+\\d+)*))(\\s+|$)", " ", x, ignore.case = T)
 x <- gsub("Servi(c|z)i*(o|e)s*\\s*(de\\s+)*(Ph|F)armac(ia|ie|y)(\\s+|$)", " ", x, ignore.case = T)
 x <- gsub("(^|\\s+)(Ph|F)armac(ia|ie|y)\\s+(Internal*|Ospedaliera|Studi Clinici|Oncologica)(\\s*E)*(\\s*Sperimentali)*(\\s+|$)", " ", x, ignore.case = T)
@@ -277,7 +277,7 @@ x <- gsub("(^|\\s+)Suite\\s$", " ", x, ignore.case = T)
 x <- gsub("(^|\\s+)C*\\s*O*(Via)*\\s*-*Loading\\s+(Dock\\s*)*\\d*(Via)*(\\s+|$)", " ", x, ignore.case = T)
 x <- gsub("(^|\\s+)C*\\s*O*(Via)*\\s*-*Loading\\s+(Dock\\s*)*(Bay\\s*)*\\d(\\s+|$)", " ", x, ignore.case = T)
 x <- gsub("(^|\\s+)C*\\s*O*(Via)*\\s*-*Loading\\s+(Dock\\s*)*(Bay\\s*)*(\\s+|$)", " ", x, ignore.case = T)
-# hyphen removal
+# Hyphen removal
 x <- gsub("(^|\\s+)-(?=\\S+)", "", x, perl = T, ignore.case = T)
 x <- gsub("([\\w])- ", "\\1", x, perl = T, ignore.case = T)
 x <- gsub("(^|\\s+)C -(\\w?\\d+)*(\\s+|$)", " ", x, ignore.case = T)
