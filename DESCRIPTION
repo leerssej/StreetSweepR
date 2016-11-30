@@ -1,0 +1,19 @@
+# StreetSweepR & CentrifugeR
+Address Cleansing Function to prepare street address information for Google Maps Address Verification and Geocoding
+Title: StreetSweepR functions to standardize domestic and international street addresses
+  * Standardization to align with dominant googleMaps address information formats
+  * Extensive Secondary unit designator removal to improve validity of googleMaps ddress verification/geocoding
+  * Country specific (conditional) address cleansing functions to apply only on a subset of particular countries 
+  * feed the function (address, countryName) such that the country names comply with those listed in the function
+  * Language specific (conditional) address cleansing functions to apply on subset of addresses classified according to designated languages
+  * feed the function (address, LanguageCode) such that the language codes comply with the ISO 639-1 codes listed in the function
+          see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes for further details
+URL: https://github.com/leerssej/GeoCodeR
+BugReports: https://github.com/leerssej/GeoCodeR/issues
+Depends:
+    R (>= 3.1.0)
+    magrittr
+    tidyverse
+Authors@R: person("Jens", "Leerssen", email = "jens.leerssen@gmail.com", role = c("aut", "cre")leerssej
+Date: Updated 19 Nov 2016
+License: GPL-3
